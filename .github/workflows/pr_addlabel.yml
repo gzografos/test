@@ -19,3 +19,5 @@ jobs:
     - name: Add Label
       run: |
         gh pr edit --add-label 'preview'
+      env:
+        GH_TOKEN: ${{ github.token }}
