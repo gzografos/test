@@ -1,0 +1,21 @@
+name: Add Label to PR
+
+on:
+  pull_request:
+    types:
+      - opened
+
+permissions:
+        id-token: write
+        contents: read
+jobs:
+  add-label:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Add Label
+      run: |
+        gh pr edit --add-label 'preview'
