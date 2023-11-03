@@ -1,2 +1,2 @@
 # sre-playground
-6
+6.1
