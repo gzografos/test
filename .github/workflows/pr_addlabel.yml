@@ -8,8 +8,6 @@ on:
 jobs:
   add-label:
     runs-on: ubuntu-latest
-    env:
-      PR_NO: ${{ github.event.pull_request.number }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -17,3 +15,7 @@ jobs:
     - name: Add Label
       run: |
         gh pr edit $PR_NO --add-label 'preview'
+      env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NO: ${{ github.event.pull_request.number }}
+
