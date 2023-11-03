@@ -5,9 +5,6 @@ on:
     types:
       - opened
 
-permissions:
-        id-token: write
-        contents: read
 jobs:
   add-label:
     runs-on: ubuntu-latest
@@ -20,5 +17,3 @@ jobs:
     - name: Add Label
       run: |
         gh pr edit $PR_NO --add-label 'preview'
-      env:
-        GH_TOKEN: ${{ github.token }}
