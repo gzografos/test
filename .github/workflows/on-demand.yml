@@ -9,7 +9,7 @@ on:
       branch:
         required: true
         description: "define branch"
-        default: ''
+        default: 'feature/**'
 permissions:
   id-token: write
   contents: read
