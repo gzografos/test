@@ -1,0 +1,27 @@
+name: OIDC Test 
+
+on:
+  workflow_dispatch:
+    inputs:
+      AssumeRole:
+        description: "IAM Role to Assume:"
+        default: "arn:aws:iam::745396447214:role/aws-oidc-test-role"
+      Region:
+        description: "AWS Region:"
+        default: "eu-central-1"
+
+jobs:
+  build:
+    name: Test AWS OIDC
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ inputs.AssumeRole }}
+          aws-region: ${{ inputs.Region }}
+      - name: test
+        run: |
+          echo "testing..."
+          aws s3 ls
+  
