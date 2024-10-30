@@ -39,10 +39,10 @@ jobs:
       - name: Test
         run: |
           sudo apt install -y expect
+          MONGOSH_COMMAND="${{ github.event.inputs.Command }}"
           unbuffer aws ecs execute-command \
             --cluster product-cluster-staging \
             --task fa0cd03047f54ff49696576f4d38d867 \
             --container mongo-wallet-staging \
             --interactive \
-            --command "/bin/sh -c 'mongosh --eval \"show dbs\"'"
-            show dbs
+            --command "/bin/sh -c 'mongosh --eval \"use consumer-wallet-db; $MONGOSH_COMMAND\"'"
