@@ -44,4 +44,3 @@ jobs:
             --container mongo-wallet-staging \
             --interactive \
             --command "/bin/sh -c 'mongosh'"
-            show dbs
