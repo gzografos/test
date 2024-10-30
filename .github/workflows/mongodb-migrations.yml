@@ -1,0 +1,30 @@
+name: MongoDB Migrations
+
+on:
+  workflow_dispatch:
+    inputs:
+      Command:
+        description: "Mongosh command to run:"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    name: Run MongoDB Migrations
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: "arn:aws:iam::588531719611:role/mongodb-migrations-oidc-role"
+          aws-region: "eu-central-1"
+      - name: Test
+        run: |
+          aws ecs execute-command --cluster product-cluster-staging --task fa0cd03047f54ff49696576f4d38d867 --container mongo-wallet-staging --interactive --command "/bin/sh"
+          mongosh
+          use consumer-wallet-db
+          show collections
+        
+  
