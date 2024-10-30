@@ -39,7 +39,7 @@ jobs:
       - name: Test
         run: |
           sudo apt install -y expect
-          aws ecs execute-command \
+          unbuffer aws ecs execute-command \
             --cluster product-cluster-staging \
             --task fa0cd03047f54ff49696576f4d38d867 \
             --container mongo-wallet-staging \
