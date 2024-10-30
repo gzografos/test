@@ -20,11 +20,18 @@ jobs:
         with:
           role-to-assume: "arn:aws:iam::588531719611:role/mongodb-migrations-oidc-role"
           aws-region: "eu-central-1"
+      # - name: Test
+      #   run: |
+      #     aws ecs execute-command --cluster product-cluster-staging --task fa0cd03047f54ff49696576f4d38d867 --container mongo-wallet-staging --interactive --command "/bin/sh"
+      #     mongosh
+      #     use consumer-wallet-db
+      #     show collections
+        
       - name: Test
         run: |
-          aws ecs execute-command --cluster product-cluster-staging --task fa0cd03047f54ff49696576f4d38d867 --container mongo-wallet-staging --interactive --command "/bin/sh"
-          mongosh
-          use consumer-wallet-db
-          show collections
-        
-  
+          aws ecs execute-command \
+            --cluster product-cluster-staging \
+            --task fa0cd03047f54ff49696576f4d38d867 \
+            --container mongo-wallet-staging \
+            --interactive \
+            --command "/bin/sh -c 'mongosh --eval \"use consumer-wallet-db; show collections\"'"
