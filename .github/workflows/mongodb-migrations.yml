@@ -38,7 +38,7 @@ jobs:
 
       - name: Test
         run: |
-          apt install -y expect
+          sudo apt install -y expect
           aws ecs execute-command \
             --cluster product-cluster-staging \
             --task fa0cd03047f54ff49696576f4d38d867 \
