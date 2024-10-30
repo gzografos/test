@@ -45,4 +45,4 @@ jobs:
             --task fa0cd03047f54ff49696576f4d38d867 \
             --container mongo-wallet-staging \
             --interactive \
-            --command "/bin/sh -c 'mongosh --eval \"use consumer-wallet-db && $MONGOSH_COMMAND\"'"
+            --command "/bin/sh -c 'mongosh --eval \"use consumer-wallet-db; show collections\"'"
