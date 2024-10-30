@@ -27,6 +27,15 @@ jobs:
       #     use consumer-wallet-db
       #     show collections
         
+      # - name: Test
+      #   run: |
+      #     aws ecs execute-command \
+      #       --cluster product-cluster-staging \
+      #       --task fa0cd03047f54ff49696576f4d38d867 \
+      #       --container mongo-wallet-staging \
+      #       --interactive \
+      #       --command "/bin/sh -c 'mongosh --eval \"use consumer-wallet-db; show collections\"'"
+
       - name: Test
         run: |
           aws ecs execute-command \
@@ -34,4 +43,7 @@ jobs:
             --task fa0cd03047f54ff49696576f4d38d867 \
             --container mongo-wallet-staging \
             --interactive \
-            --command "/bin/sh -c 'mongosh --eval \"use consumer-wallet-db; show collections\"'"
+            --command "/bin/sh -c 'mongosh <<EOF
+            use consumer-wallet-db
+            show collections
+            EOF'"
